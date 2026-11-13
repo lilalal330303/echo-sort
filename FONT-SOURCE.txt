@@ -1,0 +1,8 @@
+Font: Noto Sans SC (TrueType).otf
+Local source: C:/Windows/Fonts/Noto Sans SC (TrueType).otf
+Bundled filename: noto_sans_sc.otf
+Copyright: 2014-2020 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.
+License: SIL Open Font License, Version 1.1; see OFL.txt.
+Upstream: https://github.com/notofonts/noto-cjk
+License source: https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/LICENSE
+No modifications made to the font.
