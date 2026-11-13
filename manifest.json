@@ -1,22 +1,106 @@
 {
-  "version": "balance-rescue-20261113",
+  "format": 2,
+  "version": "mobile-streaming-20261114",
   "godot": "4.7.stable.official.5b4e0cb0f",
+  "main_pack": "play.7e90549ffe7a81f8.pck",
+  "runtime": [
+    "index.html",
+    "play.html",
+    "play.js",
+    "play.wasm",
+    "play.png",
+    "play.icon.png",
+    "play.apple-touch-icon.png",
+    "play.audio.worklet.js",
+    "play.audio.position.worklet.js",
+    "play.7e90549ffe7a81f8.pck",
+    "chapter-packs.json",
+    "content/chapter-02-9811a96d33c4ff42.pck",
+    "content/chapter-03-cdd3d241c89a1699.pck",
+    "content/chapter-04-af3539c08b764a9e.pck",
+    "content/chapter-05-7c88b6695b97944c.pck",
+    "content/chapter-06-027c3ea46662b5e4.pck"
+  ],
+  "compressed": [],
+  "retained": [
+    "play.pck"
+  ],
   "files": {
+    ".nojekyll": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "FONT-OFL.txt": {
+      "bytes": 4301,
+      "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+    },
+    "FONT-SOURCE.txt": {
+      "bytes": 837,
+      "sha256": "e31babad82a95e98d00671a1d4ebff2f564ac6dc09012393c00ad755a8dc11db"
+    },
+    "GODOT-LICENSES.txt": {
+      "bytes": 111148,
+      "sha256": "c9c15265da41d5cd2ef294e4f51905d43390c582904a56df84bfa1778e736269"
+    },
+    "README.md": {
+      "bytes": 1182,
+      "sha256": "05267d3e3ae3d9deb0a44bd5b8ef9a99ba483a46f45d3b90eea1e13ae6afff7b"
+    },
+    "chapter-packs.json": {
+      "bytes": 965,
+      "sha256": "a02c24bdc7641128cbc938030f681b416cd703d34ea16c5472671d43d06289ff"
+    },
+    "content/chapter-02-9811a96d33c4ff42.pck": {
+      "bytes": 545576,
+      "sha256": "9811a96d33c4ff425046b215c4116ce47cafe08aceac60321c9eaa2f51e946e3"
+    },
+    "content/chapter-03-cdd3d241c89a1699.pck": {
+      "bytes": 705160,
+      "sha256": "cdd3d241c89a1699b03ba5c8ed4ebf8595e9706ce166f23e26f92c492ca17d36"
+    },
+    "content/chapter-04-af3539c08b764a9e.pck": {
+      "bytes": 369640,
+      "sha256": "af3539c08b764a9ed9f3a388e79ae34f708eb13f959380a8515cd1e4ab7382e8"
+    },
+    "content/chapter-05-7c88b6695b97944c.pck": {
+      "bytes": 531528,
+      "sha256": "7c88b6695b97944cfe20e7157b6bd68cd4a93acd46bc993d59a6518faf270a9e"
+    },
+    "content/chapter-06-027c3ea46662b5e4.pck": {
+      "bytes": 628424,
+      "sha256": "027c3ea46662b5e4b4a6014d5ed6534c91a76ef57179bbe8e087c81a6a81faf3"
+    },
     "index.html": {
-      "bytes": 8206,
-      "sha256": "212f8b9c685cd695fd8b833f1626eaf994bae61c2ae598dacc013866c930ba2b"
+      "bytes": 8196,
+      "sha256": "b6b5f112ad0afbcc8e7b298205483ffbd6819983bd7327e580fadc66fff80b01"
+    },
+    "play.7e90549ffe7a81f8.pck": {
+      "bytes": 2856456,
+      "sha256": "7e90549ffe7a81f89810acb11b3be5fd4a60c4e911994c01660fb8d3e2e7112d"
+    },
+    "play.apple-touch-icon.png": {
+      "bytes": 12192,
+      "sha256": "97cd01f3edd9949576eb5a9aa015bf650d76757b316abb028eda32d468bd62b4"
+    },
+    "play.audio.position.worklet.js": {
+      "bytes": 2973,
+      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"
+    },
+    "play.audio.worklet.js": {
+      "bytes": 7298,
+      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
     },
     "play.html": {
-      "bytes": 5493,
-      "sha256": "dd90764dbf91a74f6f3c82fd33cf07d811c51637d87d66f08c2289c578585c0d"
+      "bytes": 6419,
+      "sha256": "8a9212654786e70ecf930072fc80779ddc3e9f94efb2e3a050a0c2ee92fa72fc"
+    },
+    "play.icon.png": {
+      "bytes": 15509,
+      "sha256": "57aa2a4379b9c49fc6632971297ff70c02469a11887ed84e8f4faa71632ada5f"
     },
     "play.js": {
       "bytes": 279815,
       "sha256": "68586d6daafc93c6e697b3fb258976874aa7459b8931165ebb1dc3c9614cc42c"
-    },
-    "play.wasm": {
-      "bytes": 39509339,
-      "sha256": "7eda98958eb09135a1acb54a4323a00b1a55af1997f15fa1cdc2b93e3df46656"
     },
     "play.pck": {
       "bytes": 12817816,
@@ -26,41 +110,9 @@
       "bytes": 21443,
       "sha256": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e"
     },
-    "play.icon.png": {
-      "bytes": 15509,
-      "sha256": "57aa2a4379b9c49fc6632971297ff70c02469a11887ed84e8f4faa71632ada5f"
-    },
-    "play.apple-touch-icon.png": {
-      "bytes": 12192,
-      "sha256": "97cd01f3edd9949576eb5a9aa015bf650d76757b316abb028eda32d468bd62b4"
-    },
-    "play.audio.worklet.js": {
-      "bytes": 7298,
-      "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
-    },
-    "play.audio.position.worklet.js": {
-      "bytes": 2973,
-      "sha256": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8"
-    },
-    "FONT-OFL.txt": {
-      "bytes": 4301,
-      "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
-    },
-    "FONT-SOURCE.txt": {
-      "bytes": 442,
-      "sha256": "2ef8d80e7e70ab133ce008c323bc8776f1d024f573e170bc3d01049fb8e1ae33"
-    },
-    "GODOT-LICENSES.txt": {
-      "bytes": 111148,
-      "sha256": "c9c15265da41d5cd2ef294e4f51905d43390c582904a56df84bfa1778e736269"
-    },
-    "README.md": {
-      "bytes": 939,
-      "sha256": "0377cb4a9bc80f4d83f3c5c0dd0be3f05d9b45927250a7afa10c9c92dae6e166"
-    },
-    ".nojekyll": {
-      "bytes": 0,
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    "play.wasm": {
+      "bytes": 39509339,
+      "sha256": "7eda98958eb09135a1acb54a4323a00b1a55af1997f15fa1cdc2b93e3df46656"
     }
   }
 }

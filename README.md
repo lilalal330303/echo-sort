@@ -7,4 +7,6 @@
 
 此版本仅为玩法和纯 IAA 流程演示：广告均为模拟，没有接入真实广告 SDK、内购或收入，重开免费。它不是商业正式投放版本；手机兼容性、留存及广告收益仍须验证。
 
-打开仓库的 GitHub Pages 地址即可试玩；需要 HTTPS、WebAssembly 与 WebGL2。首次加载资源约 52.7 MB，进度保存在当前浏览器。使用的 Godot 与字体许可见本目录的 `GODOT-LICENSES.txt`、`FONT-OFL.txt` 和 `FONT-SOURCE.txt`。
+启动时的基础运行文件未压缩合计约 42.7 MB（42,719,640 字节）；实际网络传输量取决于压缩和浏览器缓存。第 2–6 章资源在访问相应章节时按需加载，需要网络；首次访问章节可能需要等待。部分文件保留旧版本，用于兼容尚未刷新的页面。
+
+游戏需要 HTTPS、WebAssembly 与 WebGL2；进度保存在当前浏览器。使用的 Godot 与字体许可见本目录的 `GODOT-LICENSES.txt`、`FONT-OFL.txt` 和 `FONT-SOURCE.txt`。

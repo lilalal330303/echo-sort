@@ -1,8 +1,12 @@
-Font: Noto Sans SC (TrueType).otf
-Local source: C:/Windows/Fonts/Noto Sans SC (TrueType).otf
-Bundled filename: noto_sans_sc.otf
+Original font: Noto Sans SC (TrueType).otf
+Original local source: C:/Windows/Fonts/Noto Sans SC (TrueType).otf
+Original retained in the editable project as noto_sans_sc.otf.
+Original SHA-256: a2b93e6c2db05d6bbbf6f27d413ec73269735b7b679019c8a5aa9670ff0ffbf2
+Modified font: Echo Sort Sans Regular (echo_sort_subset.otf).
 Copyright: 2014-2020 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.
 License: SIL Open Font License, Version 1.1; see OFL.txt.
 Upstream: https://github.com/notofonts/noto-cjk
 License source: https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/LICENSE
-No modifications made to the font.
+Modifications: glyph subsetting with FontTools; family, full and PostScript names
+changed to Echo Sort Sans. The copyright and license records remain in the font.
+Rebuild and verify with: python deliverables/echo_sort/tools/subset_font.py

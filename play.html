@@ -1,220 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-		<title>回声分拣 · ECHO SORT</title>
-		<style>
-html, body, #canvas {
-	margin: 0;
-	padding: 0;
-	border: 0;
-}
-
-body {
-	color: white;
-	background-color: black;
-	overflow: hidden;
-	touch-action: none;
-}
-
-#canvas {
-	display: block;
-}
-
-#canvas:focus {
-	outline: none;
-}
-
-#status, #status-splash, #status-progress {
-	position: absolute;
-	left: 0;
-	right: 0;
-}
-
-#status, #status-splash {
-	top: 0;
-	bottom: 0;
-}
-
-#status {
-	background-color: #242424;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	visibility: hidden;
-}
-
-#status-splash {
-	max-height: 100%;
-	max-width: 100%;
-	margin: auto;
-}
-
-#status-splash.show-image--false {
-	display: none;
-}
-
-#status-splash.fullsize--true {
-	height: 100%;
-	width: 100%;
-	object-fit: contain;
-}
-
-#status-splash.use-filter--false {
-	image-rendering: pixelated;
-}
-
-#status-progress, #status-notice {
-	display: none;
-}
-
-#status-progress {
-	bottom: 10%;
-	width: 50%;
-	margin: 0 auto;
-}
-
-#status-notice {
-	background-color: #5b3943;
-	border-radius: 0.5rem;
-	border: 1px solid #9b3943;
-	color: #e0e0e0;
-	font-family: 'Noto Sans', 'Droid Sans', Arial, sans-serif;
-	line-height: 1.3;
-	margin: 0 2rem;
-	overflow: hidden;
-	padding: 1rem;
-	text-align: center;
-	z-index: 1;
-}
-		</style>
-		<link id="-gd-engine-icon" rel="icon" type="image/png" href="play.icon.png" />
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>回声分拣 · ECHO SORT</title>
+  <link id="-gd-engine-icon" rel="icon" type="image/png" href="play.icon.png" />
 <link rel="apple-touch-icon" href="play.apple-touch-icon.png"/>
 <meta name='theme-color' content='#101827'>
-	</head>
-	<body>
-		<canvas id="canvas">
-			Your browser does not support the canvas tag.
-		</canvas>
-
-		<noscript>
-			Your browser does not support JavaScript.
-		</noscript>
-
-		<div id="status">
-			<img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="play.png" alt="">
-			<progress id="status-progress"></progress>
-			<div id="status-notice"></div>
-		</div>
-
-		<script src="play.js"></script>
-		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"play","experimentalVK":false,"fileSizes":{"play.pck":12817816,"play.wasm":39509339},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+  <style>
+    :root{color-scheme:dark;font-family:system-ui,"Microsoft YaHei",sans-serif;background:#0b1427;color:#f6f0e2}
+    *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;touch-action:none}
+    #canvas{display:block;width:100%;height:100%;outline:none}
+    #loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:36px 26px;background:radial-gradient(ellipse at 50% 36%,#283343,#0b1427 68%);z-index:2}
+    .orbit{position:relative;width:120px;height:120px;margin-bottom:30px;border:1px solid #c8aa7666;border-radius:50%;box-shadow:0 0 40px #f2c77713}
+    .orbit:before,.orbit:after{content:"";position:absolute;border-radius:50%}
+    .orbit:before{width:52px;height:52px;left:15px;top:19px;background:radial-gradient(circle at 30% 25%,#fff3c7,#f2c777 53%,#ac7740);box-shadow:0 0 26px #f2c77733}
+    .orbit:after{width:56px;height:56px;right:12px;bottom:14px;background:#17243a;border:1px solid #b4b7f2;box-shadow:inset 15px -7px #b4b7f2}
+    h1{font-size:32px;font-weight:600;letter-spacing:.12em;margin:0 0 10px}.tagline{color:#b4b7f2;font-size:14px;letter-spacing:.08em;margin:0 0 42px}
+    #stage{font-size:16px;margin:0 0 16px}progress{width:min(290px,85%);height:8px;border:0;border-radius:8px;overflow:hidden;background:#23334a;accent-color:#cce69c}
+    progress::-webkit-progress-bar{background:#23334a}progress::-webkit-progress-value{background:linear-gradient(90deg,#f2c777,#cce69c);border-radius:8px}
+    #percent{color:#f2c777;font-size:13px;min-height:20px;margin:12px 0 18px;font-variant-numeric:tabular-nums}
+    #hint{font-size:13px;line-height:1.8;color:#a4b4c6;max-width:300px;margin:0;min-height:47px}
+    #retry{background:#cee6a1;color:#19302a;border:0;border-radius:12px;padding:13px 32px;margin-top:22px;font:inherit;cursor:pointer;touch-action:manipulation}
+    #retry[hidden]{display:none}.foot{position:absolute;bottom:max(26px,env(safe-area-inset-bottom));font-size:11px;color:#8293a8;letter-spacing:.04em}
+  </style>
+</head>
+<body>
+  <canvas id="canvas" aria-label="回声分拣游戏画面">请使用支持网页游戏的浏览器。</canvas>
+  <section id="loading" aria-label="游戏加载进度">
+    <div class="orbit" aria-hidden="true"></div><h1>回声分拣</h1>
+    <p class="tagline">一枚晶体，照亮日与月。</p>
+    <p id="stage" role="status" aria-live="polite">正在准备旅程</p>
+    <progress id="progress" max="100" value="0" aria-label="资源准备进度"></progress>
+    <p id="percent">0%</p>
+    <p id="hint">首次打开需准备游戏资源。<br>后续星域将在进入时加载。</p>
+    <button id="retry" hidden type="button">重新加载</button>
+    <span class="foot">六处星域 · 六十次恰到好处的相遇</span>
+  </section>
+  <noscript>请开启浏览器 JavaScript 以进入游戏。</noscript>
+  <script src="play.js"></script>
+  <script>
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"play","experimentalVK":false,"fileSizes":{"play.wasm":39509339,"play.7e90549ffe7a81f8.pck":2856456},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"mainPack":"play.7e90549ffe7a81f8.pck"};
 const GODOT_THREADS_ENABLED = false;
-const engine = new Engine(GODOT_CONFIG);
-
-(function () {
-	const statusOverlay = document.getElementById('status');
-	const statusProgress = document.getElementById('status-progress');
-	const statusNotice = document.getElementById('status-notice');
-
-	let initializing = true;
-	let statusMode = '';
-
-	function setStatusMode(mode) {
-		if (statusMode === mode || !initializing) {
-			return;
-		}
-		if (mode === 'hidden') {
-			statusOverlay.remove();
-			initializing = false;
-			return;
-		}
-		statusOverlay.style.visibility = 'visible';
-		statusProgress.style.display = mode === 'progress' ? 'block' : 'none';
-		statusNotice.style.display = mode === 'notice' ? 'block' : 'none';
-		statusMode = mode;
-	}
-
-	function setStatusNotice(text) {
-		while (statusNotice.lastChild) {
-			statusNotice.removeChild(statusNotice.lastChild);
-		}
-		const lines = text.split('\n');
-		lines.forEach((line) => {
-			statusNotice.appendChild(document.createTextNode(line));
-			statusNotice.appendChild(document.createElement('br'));
-		});
-	}
-
-	function displayFailureNotice(err) {
-		console.error(err);
-		if (err instanceof Error) {
-			setStatusNotice(err.message);
-		} else if (typeof err === 'string') {
-			setStatusNotice(err);
-		} else {
-			setStatusNotice('An unknown error occurred.');
-		}
-		setStatusMode('notice');
-		initializing = false;
-	}
-
-	const missing = Engine.getMissingFeatures({
-		threads: GODOT_THREADS_ENABLED,
-	});
-
-	if (missing.length !== 0) {
-		if (GODOT_CONFIG['serviceWorker'] && GODOT_CONFIG['ensureCrossOriginIsolationHeaders'] && 'serviceWorker' in navigator) {
-			let serviceWorkerRegistrationPromise;
-			try {
-				serviceWorkerRegistrationPromise = navigator.serviceWorker.getRegistration();
-			} catch (err) {
-				serviceWorkerRegistrationPromise = Promise.reject(new Error('Service worker registration failed.'));
-			}
-			// There's a chance that installing the service worker would fix the issue
-			Promise.race([
-				serviceWorkerRegistrationPromise.then((registration) => {
-					if (registration != null) {
-						return Promise.reject(new Error('Service worker already exists.'));
-					}
-					return registration;
-				}).then(() => engine.installServiceWorker()),
-				// For some reason, `getRegistration()` can stall
-				new Promise((resolve) => {
-					setTimeout(() => resolve(), 2000);
-				}),
-			]).then(() => {
-				// Reload if there was no error.
-				window.location.reload();
-			}).catch((err) => {
-				console.error('Error while registering service worker:', err);
-			});
-		} else {
-			// Display the message as usual
-			const missingMsg = 'Error\nThe following features required to run Godot projects on the Web are missing:\n';
-			displayFailureNotice(missingMsg + missing.join('\n'));
-		}
-	} else {
-		setStatusMode('progress');
-		engine.startGame({
-			'onProgress': function (current, total) {
-				if (current > 0 && total > 0) {
-					statusProgress.value = current;
-					statusProgress.max = total;
-				} else {
-					statusProgress.removeAttribute('value');
-					statusProgress.removeAttribute('max');
-				}
-			},
-		}).then(() => {
-			setStatusMode('hidden');
-		}, displayFailureNotice);
-	}
-}());
-		</script>
-	</body>
+const ECHO_BUILD = 'mobile-streaming-20261114';
+const loader = document.getElementById('loading');
+const progress = document.getElementById('progress');
+const percentage = document.getElementById('percent');
+const stage = document.getElementById('stage');
+const hint = document.getElementById('hint');
+const retry = document.getElementById('retry');
+retry.addEventListener('click', () => location.reload());
+let complete = false;
+let lastProgress = performance.now();
+let lastBytes = -1;
+let phase = 'download';
+// Diagnostics stay in memory; no telemetry is sent to a service.
+window.echoBoot = {version:ECHO_BUILD,startedAt:performance.now(),phase:'download',progress:0};
+const slowTimer = setInterval(() => {
+  if (complete || document.hidden) return;
+  if (performance.now() - lastProgress > 15000) {
+    hint.textContent = phase === 'download' ? '网络暂时较慢，请保持页面开启。若长时间没有变化，可重新加载。' : '正在打开场景，首次准备可能需要多等一会儿。';
+    retry.hidden = false;
+  }
+}, 3000);
+function bootFailure(error) {
+  complete = true; clearInterval(slowTimer);
+  window.echoBoot.phase = 'failed';
+  stage.textContent = '旅程暂时没有准备好';
+  hint.textContent = '请检查网络后重试，也可以在手机浏览器中打开此链接。';
+  retry.hidden = false;
+  console.error('Echo Sort startup failed:', error);
+}
+try {
+  const missing = Engine.getMissingFeatures({threads:GODOT_THREADS_ENABLED});
+  if (missing.length) {
+    bootFailure(new Error(missing.join(', ')));
+    hint.textContent = '当前浏览器暂不支持运行游戏，请尝试更新微信或用系统浏览器打开。';
+  } else {
+    const engine = new Engine(GODOT_CONFIG);
+    engine.startGame({onProgress(current,total) {
+      if (current !== lastBytes) {lastProgress = performance.now(); lastBytes = current; retry.hidden = true;}
+      if (total > 0) {
+        const value = Math.max(0, Math.min(100, current / total * 100));
+        progress.value = value; percentage.textContent = Math.floor(value) + '%';
+        window.echoBoot.progress = value;
+        if (current >= total) {
+          phase = 'initialize'; stage.textContent = '正在点亮晨光花园';
+          hint.textContent = '资源已就绪，马上开启旅程。';
+        } else {stage.textContent = '正在准备游戏资源';}
+      } else {progress.removeAttribute('value'); percentage.textContent = '准备中';}
+    }}).then(() => {
+      complete = true; clearInterval(slowTimer);
+      window.echoBoot.phase = 'ready'; window.echoBoot.readyAt = performance.now();
+      loader.remove();
+    }).catch(bootFailure);
+  }
+} catch (error) {bootFailure(error);}
+  </script>
+</body>
 </html>
 
