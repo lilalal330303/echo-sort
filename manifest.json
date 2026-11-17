@@ -1,8 +1,8 @@
 {
   "format": 2,
-  "version": "kitchen-serve-20261117",
+  "version": "kitchen-ui-20261117",
   "godot": "4.7.stable.official.5b4e0cb0f",
-  "main_pack": "play.c53a74fb027e516a.pck",
+  "main_pack": "play.0fa01bfc6e2b3ba2.pck",
   "runtime": [
     "index.html",
     "play.html",
@@ -13,7 +13,7 @@
     "play.apple-touch-icon.png",
     "play.audio.worklet.js",
     "play.audio.position.worklet.js",
-    "play.c53a74fb027e516a.pck",
+    "play.0fa01bfc6e2b3ba2.pck",
     "chapter-packs.json",
     "content/chapter-02-216f55eead5b524f.pck",
     "content/chapter-03-cff591fcfd0f3c34.pck",
@@ -34,6 +34,7 @@
     "play.7d47291861d7d0d7.pck",
     "play.7e90549ffe7a81f8.pck",
     "play.c2f992a652f0e24f.pck",
+    "play.c53a74fb027e516a.pck",
     "play.pck"
   ],
   "files": {
@@ -55,11 +56,11 @@
     },
     "README.md": {
       "bytes": 1203,
-      "sha256": "95d56ddfca3b1b68ab76819e0830dd71afcc80385d91737da7ed4cbd6750c36a"
+      "sha256": "33d34462fd74d76f2a881df16ff23fefcfdec72cd471a6270b11aa4cbee13719"
     },
     "chapter-packs.json": {
-      "bytes": 962,
-      "sha256": "d6ed29cc36812e8377c7787999f26c5124352893f83fc9658b7a15218b7047d1"
+      "bytes": 959,
+      "sha256": "5dadf9961a491779885536e0e713001fa2f6be417141c765cc768aa3a0481d24"
     },
     "content/chapter-02-216f55eead5b524f.pck": {
       "bytes": 461864,
@@ -102,12 +103,16 @@
       "sha256": "14b9ababd028299ffebcad966c2b96efb705659174b5aebbc6f8779799631198"
     },
     "index.html": {
-      "bytes": 1955,
-      "sha256": "fa706f9f70d95de41742696594af81a894d538c64049f197a35a63fc5788fe06"
+      "bytes": 1952,
+      "sha256": "14eba0a2258bdd6cb00204486e4984add6c8d3ace8dbb017e00544bf92e48123"
     },
     "play.03ac07a4a21111f2.pck": {
       "bytes": 1656684,
       "sha256": "03ac07a4a21111f27c0c574be65f41fc040bc01b7d4d53e8210122413cdf4f26"
+    },
+    "play.0fa01bfc6e2b3ba2.pck": {
+      "bytes": 2503872,
+      "sha256": "0fa01bfc6e2b3ba2e69f162dd5e581c1889450b74f42acc1af1281715eef1034"
     },
     "play.1bd84b6d52178c49.pck": {
       "bytes": 1927480,
@@ -146,8 +151,8 @@
       "sha256": "c53a74fb027e516a1e7b04b54a92e5dcbe1afdf3ba3b46f7e626bfab166a9ccb"
     },
     "play.html": {
-      "bytes": 6957,
-      "sha256": "fda7f81d93d356c2b595a3725db6f12417ba15f1009ddcbd3dcc9070e9d182cc"
+      "bytes": 6954,
+      "sha256": "38ac6b535bf435499b62337280813cede68dc8847213f9edf7f4bfed3da8417c"
     },
     "play.icon.png": {
       "bytes": 14070,
