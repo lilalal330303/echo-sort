@@ -1,8 +1,8 @@
 {
   "format": 2,
-  "version": "kitchen-focus-20261117",
+  "version": "kitchen-serve-20261117",
   "godot": "4.7.stable.official.5b4e0cb0f",
-  "main_pack": "play.682c8f4227be07f4.pck",
+  "main_pack": "play.c53a74fb027e516a.pck",
   "runtime": [
     "index.html",
     "play.html",
@@ -13,7 +13,7 @@
     "play.apple-touch-icon.png",
     "play.audio.worklet.js",
     "play.audio.position.worklet.js",
-    "play.682c8f4227be07f4.pck",
+    "play.c53a74fb027e516a.pck",
     "chapter-packs.json",
     "content/chapter-02-216f55eead5b524f.pck",
     "content/chapter-03-cff591fcfd0f3c34.pck",
@@ -30,6 +30,7 @@
     "content/chapter-06-027c3ea46662b5e4.pck",
     "play.03ac07a4a21111f2.pck",
     "play.1bd84b6d52178c49.pck",
+    "play.682c8f4227be07f4.pck",
     "play.7d47291861d7d0d7.pck",
     "play.7e90549ffe7a81f8.pck",
     "play.c2f992a652f0e24f.pck",
@@ -54,11 +55,11 @@
     },
     "README.md": {
       "bytes": 1203,
-      "sha256": "49c77a2fcb263281735fb0a8ea33c87940a322c055dd403cacb0542966006c5f"
+      "sha256": "95d56ddfca3b1b68ab76819e0830dd71afcc80385d91737da7ed4cbd6750c36a"
     },
     "chapter-packs.json": {
       "bytes": 962,
-      "sha256": "037ee1b4758a74dbfbf9126e45bc844026cad1aa595f034ba3780555d65d0510"
+      "sha256": "d6ed29cc36812e8377c7787999f26c5124352893f83fc9658b7a15218b7047d1"
     },
     "content/chapter-02-216f55eead5b524f.pck": {
       "bytes": 461864,
@@ -102,7 +103,7 @@
     },
     "index.html": {
       "bytes": 1955,
-      "sha256": "d49db3b673e59cb96be2a5ef54df818fde043287ce6a1d686cdc34429e417095"
+      "sha256": "fa706f9f70d95de41742696594af81a894d538c64049f197a35a63fc5788fe06"
     },
     "play.03ac07a4a21111f2.pck": {
       "bytes": 1656684,
@@ -140,9 +141,13 @@
       "bytes": 1656684,
       "sha256": "c2f992a652f0e24f0cf43cf6937c7d41a2df94cd57f82e2afe86560d2b200edf"
     },
+    "play.c53a74fb027e516a.pck": {
+      "bytes": 2407128,
+      "sha256": "c53a74fb027e516a1e7b04b54a92e5dcbe1afdf3ba3b46f7e626bfab166a9ccb"
+    },
     "play.html": {
       "bytes": 6957,
-      "sha256": "788121e10d61a1d3a53fd2ea6534273cad6c69f839a85672a5733769c3538e4e"
+      "sha256": "fda7f81d93d356c2b595a3725db6f12417ba15f1009ddcbd3dcc9070e9d182cc"
     },
     "play.icon.png": {
       "bytes": 14070,
