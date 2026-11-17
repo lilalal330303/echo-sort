@@ -3,46 +3,46 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>回声分拣 · ECHO SORT</title>
+  <title>开饭啦！双拼厨房 · BENTO POP</title>
   <link id="-gd-engine-icon" rel="icon" type="image/png" href="play.icon.png" />
 <link rel="apple-touch-icon" href="play.apple-touch-icon.png"/>
 <meta name='theme-color' content='#101827'>
   <style>
-    :root{color-scheme:dark;font-family:system-ui,"Microsoft YaHei",sans-serif;background:#0b1427;color:#f6f0e2}
+    :root{color-scheme:light;font-family:system-ui,"Microsoft YaHei",sans-serif;background:#fff0cd;color:#55301f}
     *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;touch-action:none}
     #canvas{display:block;width:100%;height:100%;outline:none}
-    #loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:36px 26px;background:radial-gradient(ellipse at 50% 36%,#283343,#0b1427 68%);z-index:2}
-    .orbit{position:relative;width:120px;height:120px;margin-bottom:30px;border:1px solid #c8aa7666;border-radius:50%;box-shadow:0 0 40px #f2c77713}
+    #loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:36px 26px;background:radial-gradient(ellipse at 50% 36%,#fffaf0,#ffe4ab 85%);z-index:2}
+    .orbit{position:relative;width:120px;height:90px;margin-bottom:30px;border:7px solid #fffdf3;border-radius:25px;background:#fbd39b;box-shadow:0 8px 0 #ce8e52,0 14px 20px #99512c22;transform:rotate(-6deg)}
     .orbit:before,.orbit:after{content:"";position:absolute;border-radius:50%}
-    .orbit:before{width:52px;height:52px;left:15px;top:19px;background:radial-gradient(circle at 30% 25%,#fff3c7,#f2c777 53%,#ac7740);box-shadow:0 0 26px #f2c77733}
-    .orbit:after{width:56px;height:56px;right:12px;bottom:14px;background:#17243a;border:1px solid #b4b7f2;box-shadow:inset 15px -7px #b4b7f2}
-    h1{font-size:32px;font-weight:600;letter-spacing:.12em;margin:0 0 10px}.tagline{color:#b4b7f2;font-size:14px;letter-spacing:.08em;margin:0 0 42px}
-    #stage{font-size:16px;margin:0 0 16px}progress{width:min(290px,85%);height:8px;border:0;border-radius:8px;overflow:hidden;background:#23334a;accent-color:#cce69c}
-    progress::-webkit-progress-bar{background:#23334a}progress::-webkit-progress-value{background:linear-gradient(90deg,#f2c777,#cce69c);border-radius:8px}
-    #percent{color:#f2c777;font-size:13px;min-height:20px;margin:12px 0 18px;font-variant-numeric:tabular-nums}
-    #hint{font-size:13px;line-height:1.8;color:#a4b4c6;max-width:300px;margin:0;min-height:47px}
+    .orbit:before{width:38px;height:38px;left:10px;top:16px;background:linear-gradient(#ffb475,#ed6c4e);box-shadow:0 4px 0 #c54e32,inset 0 3px 0 #ffe0bc}
+    .orbit:after{width:38px;height:38px;right:10px;top:16px;background:linear-gradient(#a7e280,#53a344);box-shadow:0 4px 0 #3c8237,inset 0 3px 0 #d6f0a5}
+    h1{font-size:32px;font-weight:850;letter-spacing:.03em;margin:0 0 10px;color:#bd3f2b}.tagline{color:#886249;font-size:14px;letter-spacing:.08em;margin:0 0 42px}
+    #stage{font-size:16px;margin:0 0 16px}progress{width:min(290px,85%);height:12px;border:0;border-radius:8px;overflow:hidden;background:#efd5aa;accent-color:#ed6c4e}
+    progress::-webkit-progress-bar{background:#efd5aa}progress::-webkit-progress-value{background:linear-gradient(90deg,#ffba65,#ed6c4e);border-radius:8px}
+    #percent{color:#a65b15;font-size:13px;min-height:20px;margin:12px 0 18px;font-variant-numeric:tabular-nums}
+    #hint{font-size:13px;line-height:1.8;color:#886249;max-width:300px;margin:0;min-height:47px}
     #retry{background:#cee6a1;color:#19302a;border:0;border-radius:12px;padding:13px 32px;margin-top:22px;font:inherit;cursor:pointer;touch-action:manipulation}
     #retry[hidden]{display:none}.foot{position:absolute;bottom:max(26px,env(safe-area-inset-bottom));font-size:11px;color:#8293a8;letter-spacing:.04em}
   </style>
 </head>
 <body>
-  <canvas id="canvas" aria-label="回声分拣游戏画面">请使用支持网页游戏的浏览器。</canvas>
+  <canvas id="canvas" aria-label="双拼厨房游戏画面">请使用支持网页游戏的浏览器。</canvas>
   <section id="loading" aria-label="游戏加载进度">
-    <div class="orbit" aria-hidden="true"></div><h1>回声分拣</h1>
-    <p class="tagline">一枚晶体，照亮日与月。</p>
-    <p id="stage" role="status" aria-live="polite">正在准备旅程</p>
+    <div class="orbit" aria-hidden="true"></div><h1>开饭啦！双拼厨房</h1>
+    <p class="tagline">一盘两份，三同出餐！</p>
+    <p id="stage" role="status" aria-live="polite">小厨房正在备餐</p>
     <progress id="progress" max="100" value="0" aria-label="资源准备进度"></progress>
     <p id="percent">0%</p>
-    <p id="hint">首次打开需准备游戏资源。<br>后续星域将在进入时加载。</p>
+    <p id="hint">首次打开需准备游戏资源。<br>后续餐厅将在进入时加载。</p>
     <button id="retry" hidden type="button">重新加载</button>
-    <span class="foot">六处星域 · 六十次恰到好处的相遇</span>
+    <span class="foot">6 家小店 · 60 关美味接力</span>
   </section>
   <noscript>请开启浏览器 JavaScript 以进入游戏。</noscript>
   <script src="play.js"></script>
   <script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"play","experimentalVK":false,"fileSizes":{"play.wasm":39509339,"play.7e90549ffe7a81f8.pck":2856456},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"mainPack":"play.7e90549ffe7a81f8.pck"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"play","experimentalVK":false,"fileSizes":{"play.wasm":39509339,"play.c2f992a652f0e24f.pck":1656684},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"mainPack":"play.c2f992a652f0e24f.pck"};
 const GODOT_THREADS_ENABLED = false;
-const ECHO_BUILD = 'mobile-streaming-20261114';
+const ECHO_BUILD = 'bento-pop-20261117';
 const loader = document.getElementById('loading');
 const progress = document.getElementById('progress');
 const percentage = document.getElementById('percent');
@@ -66,7 +66,7 @@ const slowTimer = setInterval(() => {
 function bootFailure(error) {
   complete = true; clearInterval(slowTimer);
   window.echoBoot.phase = 'failed';
-  stage.textContent = '旅程暂时没有准备好';
+  stage.textContent = '厨房暂时没有准备好';
   hint.textContent = '请检查网络后重试，也可以在手机浏览器中打开此链接。';
   retry.hidden = false;
   console.error('Echo Sort startup failed:', error);
@@ -85,8 +85,8 @@ try {
         progress.value = value; percentage.textContent = Math.floor(value) + '%';
         window.echoBoot.progress = value;
         if (current >= total) {
-          phase = 'initialize'; stage.textContent = '正在点亮晨光花园';
-          hint.textContent = '资源已就绪，马上开启旅程。';
+          phase = 'initialize'; stage.textContent = '正在打开早餐餐车';
+          hint.textContent = '餐点已就绪，马上开饭。';
         } else {stage.textContent = '正在准备游戏资源';}
       } else {progress.removeAttribute('value'); percentage.textContent = '准备中';}
     }}).then(() => {
