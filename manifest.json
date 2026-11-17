@@ -1,8 +1,8 @@
 {
   "format": 2,
-  "version": "bento-pop-20261117",
+  "version": "kitchen-volume-20261117",
   "godot": "4.7.stable.official.5b4e0cb0f",
-  "main_pack": "play.03ac07a4a21111f2.pck",
+  "main_pack": "play.7d47291861d7d0d7.pck",
   "runtime": [
     "index.html",
     "play.html",
@@ -13,7 +13,7 @@
     "play.apple-touch-icon.png",
     "play.audio.worklet.js",
     "play.audio.position.worklet.js",
-    "play.03ac07a4a21111f2.pck",
+    "play.7d47291861d7d0d7.pck",
     "chapter-packs.json",
     "content/chapter-02-216f55eead5b524f.pck",
     "content/chapter-03-cff591fcfd0f3c34.pck",
@@ -28,6 +28,7 @@
     "content/chapter-04-af3539c08b764a9e.pck",
     "content/chapter-05-7c88b6695b97944c.pck",
     "content/chapter-06-027c3ea46662b5e4.pck",
+    "play.03ac07a4a21111f2.pck",
     "play.7e90549ffe7a81f8.pck",
     "play.c2f992a652f0e24f.pck",
     "play.pck"
@@ -51,11 +52,11 @@
     },
     "README.md": {
       "bytes": 1203,
-      "sha256": "a0ccc4937c15707ad46be652e50738c19131f1f03fb3d7d34717753308748f4d"
+      "sha256": "ad04420c8efb5bfd290d5c40e06a29e6676904325934a85084a48052930f0da7"
     },
     "chapter-packs.json": {
-      "bytes": 958,
-      "sha256": "0cf3187962fab57fc2946a6e6c906b491ecb5ac07ee7ab4d31902346adae3f0e"
+      "bytes": 963,
+      "sha256": "041e490fa0ec31a727d4d296c4615c768ebaf34e968989a1f56b8a2bc11ff52b"
     },
     "content/chapter-02-216f55eead5b524f.pck": {
       "bytes": 461864,
@@ -98,12 +99,16 @@
       "sha256": "14b9ababd028299ffebcad966c2b96efb705659174b5aebbc6f8779799631198"
     },
     "index.html": {
-      "bytes": 3643,
-      "sha256": "24469ba23e15e05dbdbbb503a35bae90182a14fc2a26824e72489893ed88e65f"
+      "bytes": 3648,
+      "sha256": "b7f8201dd692e14b4135f41bdac81f94d45321e7bf1b29e78b14f8a3102feb9b"
     },
     "play.03ac07a4a21111f2.pck": {
       "bytes": 1656684,
       "sha256": "03ac07a4a21111f27c0c574be65f41fc040bc01b7d4d53e8210122413cdf4f26"
+    },
+    "play.7d47291861d7d0d7.pck": {
+      "bytes": 1927480,
+      "sha256": "7d47291861d7d0d7e4f95047eccb89f90e8adf9c4ce2025816416a7f95060ca0"
     },
     "play.7e90549ffe7a81f8.pck": {
       "bytes": 2856456,
@@ -126,8 +131,8 @@
       "sha256": "c2f992a652f0e24f0cf43cf6937c7d41a2df94cd57f82e2afe86560d2b200edf"
     },
     "play.html": {
-      "bytes": 6493,
-      "sha256": "2a8026c3e9257663b4c5c59c4903eb292d471db6c0cc69f94ff14ddd83e12af7"
+      "bytes": 6498,
+      "sha256": "99d48d811fcf33c38631814d7065819d9cedd6a2768e8f3bd19398f944d0435f"
     },
     "play.icon.png": {
       "bytes": 14070,
