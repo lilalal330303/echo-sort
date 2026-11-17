@@ -2,7 +2,7 @@
   "format": 2,
   "version": "bento-pop-20261117",
   "godot": "4.7.stable.official.5b4e0cb0f",
-  "main_pack": "play.c2f992a652f0e24f.pck",
+  "main_pack": "play.03ac07a4a21111f2.pck",
   "runtime": [
     "index.html",
     "play.html",
@@ -13,7 +13,7 @@
     "play.apple-touch-icon.png",
     "play.audio.worklet.js",
     "play.audio.position.worklet.js",
-    "play.c2f992a652f0e24f.pck",
+    "play.03ac07a4a21111f2.pck",
     "chapter-packs.json",
     "content/chapter-02-216f55eead5b524f.pck",
     "content/chapter-03-cff591fcfd0f3c34.pck",
@@ -29,6 +29,7 @@
     "content/chapter-05-7c88b6695b97944c.pck",
     "content/chapter-06-027c3ea46662b5e4.pck",
     "play.7e90549ffe7a81f8.pck",
+    "play.c2f992a652f0e24f.pck",
     "play.pck"
   ],
   "files": {
@@ -100,6 +101,10 @@
       "bytes": 3643,
       "sha256": "24469ba23e15e05dbdbbb503a35bae90182a14fc2a26824e72489893ed88e65f"
     },
+    "play.03ac07a4a21111f2.pck": {
+      "bytes": 1656684,
+      "sha256": "03ac07a4a21111f27c0c574be65f41fc040bc01b7d4d53e8210122413cdf4f26"
+    },
     "play.7e90549ffe7a81f8.pck": {
       "bytes": 2856456,
       "sha256": "7e90549ffe7a81f89810acb11b3be5fd4a60c4e911994c01660fb8d3e2e7112d"
@@ -122,7 +127,7 @@
     },
     "play.html": {
       "bytes": 6493,
-      "sha256": "89604c0e0b3c2fbf683be4212f787a12a1a019b6cce7eefde20c92b4ab3bcd79"
+      "sha256": "2a8026c3e9257663b4c5c59c4903eb292d471db6c0cc69f94ff14ddd83e12af7"
     },
     "play.icon.png": {
       "bytes": 14070,
