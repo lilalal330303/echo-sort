@@ -10,7 +10,9 @@
   <style>
     :root{color-scheme:light;font-family:system-ui,"Microsoft YaHei",sans-serif;background:#fff0cd;color:#55301f}
     *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;touch-action:none}
-    #canvas{display:block;width:100%;height:100%;outline:none}
+    body{background:linear-gradient(180deg,#fff0cd 0%,#f3d39d 48%,#c58650 100%)}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,#fff7de19 0 58px,transparent 58px 116px),repeating-linear-gradient(0deg,#fff5d919 0 2px,transparent 2px 88px)}
+    #canvas{display:block;position:absolute;inset:0;margin:auto;width:min(100vw,calc(100dvh * 720 / 1100));height:min(100dvh,calc(100vw * 1100 / 720));outline:none;touch-action:none}
     #loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:36px 26px;background:radial-gradient(ellipse at 50% 36%,#fffaf0,#ffe4ab 85%);z-index:2}
     .orbit{position:relative;width:120px;height:90px;margin-bottom:30px;border:7px solid #fffdf3;border-radius:25px;background:#fbd39b;box-shadow:0 8px 0 #ce8e52,0 14px 20px #99512c22;transform:rotate(-6deg)}
     .orbit:before,.orbit:after{content:"";position:absolute;border-radius:50%}
@@ -26,7 +28,7 @@
   </style>
 </head>
 <body>
-  <canvas id="canvas" aria-label="双拼厨房游戏画面">请使用支持网页游戏的浏览器。</canvas>
+  <canvas id="canvas" width="720" height="1100" aria-label="双拼厨房游戏画面">请使用支持网页游戏的浏览器。</canvas>
   <section id="loading" aria-label="游戏加载进度">
     <div class="orbit" aria-hidden="true"></div><h1>开饭啦！双拼厨房</h1>
     <p class="tagline">一盘两份，三同出餐！</p>
@@ -40,7 +42,10 @@
   <noscript>请开启浏览器 JavaScript 以进入游戏。</noscript>
   <script src="play.js"></script>
   <script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"play","experimentalVK":false,"fileSizes":{"play.wasm":39509339,"play.7d47291861d7d0d7.pck":1927480},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"mainPack":"play.7d47291861d7d0d7.pck"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"play","experimentalVK":false,"fileSizes":{"play.wasm":39509339,"play.1bd84b6d52178c49.pck":1927480},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"mainPack":"play.1bd84b6d52178c49.pck"};
+// Keep the render buffer at the designed ratio. CSS fits it into the viewport
+// over the kitchen backdrop, avoiding engine-generated black letterboxes.
+GODOT_CONFIG.canvasResizePolicy = 0;
 const GODOT_THREADS_ENABLED = false;
 const ECHO_BUILD = 'kitchen-volume-20261117';
 const loader = document.getElementById('loading');
