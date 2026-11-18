@@ -6,14 +6,14 @@
   <title>开饭啦！双拼厨房 · BENTO POP</title>
   <link id="-gd-engine-icon" rel="icon" type="image/png" href="play.icon.png" />
 <link rel="apple-touch-icon" href="play.apple-touch-icon.png"/>
-<meta name='theme-color' content='#101827'>
+<meta name='theme-color' content='#fff0cd'>
   <style>
     :root{color-scheme:light;font-family:system-ui,"Microsoft YaHei",sans-serif;background:#fff0cd;color:#55301f}
     *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;touch-action:none}
-    body{background:linear-gradient(180deg,#fff0cd 0%,#f3d39d 48%,#c58650 100%)}
+    body{background:linear-gradient(180deg,#c5f4ff 0%,#fff9e8 48%,#ffe4b5 100%)}
     body:before{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,#fff7de19 0 58px,transparent 58px 116px),repeating-linear-gradient(0deg,#fff5d919 0 2px,transparent 2px 88px)}
     #canvas{display:block;position:absolute;inset:0;margin:auto;width:min(100vw,calc(100dvh * 720 / 1440));height:min(100dvh,calc(100vw * 1440 / 720));outline:none;touch-action:none}
-    #loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:36px 26px;background:radial-gradient(ellipse at 50% 36%,#fffaf0,#ffe4ab 85%);z-index:2}
+    #loading{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:36px 26px;background:radial-gradient(ellipse at 50% 42%,#fffdf4 20%,#fff0cd 65%,#bdf2ef 130%);z-index:2}
     .orbit{position:relative;width:120px;height:90px;margin-bottom:30px;border:7px solid #fffdf3;border-radius:25px;background:#fbd39b;box-shadow:0 8px 0 #ce8e52,0 14px 20px #99512c22;transform:rotate(-6deg)}
     .orbit:before,.orbit:after{content:"";position:absolute;border-radius:50%}
     .orbit:before{width:38px;height:38px;left:10px;top:16px;background:linear-gradient(#ffb475,#ed6c4e);box-shadow:0 4px 0 #c54e32,inset 0 3px 0 #ffe0bc}
@@ -23,7 +23,7 @@
     progress::-webkit-progress-bar{background:#efd5aa}progress::-webkit-progress-value{background:linear-gradient(90deg,#ffba65,#ed6c4e);border-radius:8px}
     #percent{color:#a65b15;font-size:13px;min-height:20px;margin:12px 0 18px;font-variant-numeric:tabular-nums}
     #hint{font-size:13px;line-height:1.8;color:#886249;max-width:300px;margin:0;min-height:47px}
-    #retry{background:#cee6a1;color:#19302a;border:0;border-radius:12px;padding:13px 32px;margin-top:22px;font:inherit;cursor:pointer;touch-action:manipulation}
+    #retry{background:linear-gradient(#ff816a,#f24c3d);color:white;border:2px solid #fff6dc;border-radius:22px;padding:13px 32px;margin-top:22px;font:inherit;font-weight:800;box-shadow:0 4px 0 #bd3e2f;cursor:pointer;touch-action:manipulation}
     #retry[hidden]{display:none}.foot{position:absolute;bottom:max(26px,env(safe-area-inset-bottom));font-size:11px;color:#8293a8;letter-spacing:.04em}
   </style>
 </head>
@@ -41,12 +41,12 @@
   <noscript>请开启浏览器 JavaScript 以进入游戏。</noscript>
   <script src="play.js"></script>
   <script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"play","experimentalVK":false,"fileSizes":{"play.wasm":39509339,"play.dd096c8fa7fd1f0c.pck":3084048},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"mainPack":"play.dd096c8fa7fd1f0c.pck"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"play","experimentalVK":false,"fileSizes":{"play.wasm":39509339,"play.ced5bf355926f816.pck":2900148},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"mainPack":"play.ced5bf355926f816.pck"};
 // Keep the render buffer at the designed ratio. CSS fits it into the viewport
 // over the kitchen backdrop, avoiding engine-generated black letterboxes.
 GODOT_CONFIG.canvasResizePolicy = 0;
 const GODOT_THREADS_ENABLED = false;
-const ECHO_BUILD = 'kitchen-ui-20261117';
+const ECHO_BUILD = 'sunny-ui-20261119';
 const loader = document.getElementById('loading');
 const progress = document.getElementById('progress');
 const percentage = document.getElementById('percent');
@@ -89,9 +89,9 @@ try {
         progress.value = value; percentage.textContent = Math.floor(value) + '%';
         window.echoBoot.progress = value;
         if (current >= total) {
-          phase = 'initialize'; stage.textContent = '正在打开早餐餐车';
+          phase = 'initialize'; stage.textContent = '马上开饭';
           hint.textContent = '餐点已就绪，马上开饭。';
-        } else {stage.textContent = '正在准备游戏资源';}
+        } else {stage.textContent = '备餐中';}
       } else {progress.removeAttribute('value'); percentage.textContent = '准备中';}
     }}).then(() => {
       complete = true; clearInterval(slowTimer);
