@@ -1,8 +1,8 @@
 {
   "format": 2,
-  "version": "sunny-fidelity-20261119",
+  "version": "game-feel-20261119",
   "godot": "4.7.stable.official.5b4e0cb0f",
-  "main_pack": "play.4e1323e393cd2a85.pck",
+  "main_pack": "play.f5de0ec5966a6097.pck",
   "runtime": [
     "index.html",
     "play.html",
@@ -13,7 +13,7 @@
     "play.apple-touch-icon.png",
     "play.audio.worklet.js",
     "play.audio.position.worklet.js",
-    "play.4e1323e393cd2a85.pck",
+    "play.f5de0ec5966a6097.pck",
     "chapter-packs.json",
     "content/chapter-02-216f55eead5b524f.pck",
     "content/chapter-03-cff591fcfd0f3c34.pck",
@@ -32,6 +32,7 @@
     "play.0fa01bfc6e2b3ba2.pck",
     "play.1bd84b6d52178c49.pck",
     "play.3d21cf261fad3d34.pck",
+    "play.4e1323e393cd2a85.pck",
     "play.682c8f4227be07f4.pck",
     "play.76e3e5d580a592b1.pck",
     "play.7d47291861d7d0d7.pck",
@@ -50,12 +51,12 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     "FONT-OFL.txt": {
-      "bytes": 4301,
-      "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+      "bytes": 13333,
+      "sha256": "55dde7dee22f1621640804613c5f96cadf6e4751cab8580c7dfd83c94a10d1b6"
     },
     "FONT-SOURCE.txt": {
-      "bytes": 837,
-      "sha256": "e31babad82a95e98d00671a1d4ebff2f564ac6dc09012393c00ad755a8dc11db"
+      "bytes": 2351,
+      "sha256": "1f64d18fe5d9e8f9abe88b095009a1b05a8ddda55cc3e1ed9c602c31f1aef9f2"
     },
     "GODOT-LICENSES.txt": {
       "bytes": 111148,
@@ -63,11 +64,11 @@
     },
     "README.md": {
       "bytes": 1203,
-      "sha256": "70e405e72c8bf2ff6fe8b9f901673b55811138cc0a6830815d1ba17cbcc1c15c"
+      "sha256": "743a68460a81bb99becc46fbef8b94f7ef3f2ac530877242152bfbb094dfb225"
     },
     "chapter-packs.json": {
-      "bytes": 963,
-      "sha256": "7aeb7fde6b1b9f52e37d62cd93d8f596ebc69df6ac981da5cfc72a821794169e"
+      "bytes": 958,
+      "sha256": "800da92d9751f73e715dde83a921706cb57f2ef98ef96f19fe3507ff4f838228"
     },
     "content/chapter-02-216f55eead5b524f.pck": {
       "bytes": 461864,
@@ -110,8 +111,8 @@
       "sha256": "14b9ababd028299ffebcad966c2b96efb705659174b5aebbc6f8779799631198"
     },
     "index.html": {
-      "bytes": 1956,
-      "sha256": "cae7f1d19e4e554c1ea3b8b54a6783d52da9a0b951932034c022bc2087c540e9"
+      "bytes": 1951,
+      "sha256": "dcdaf169c9d621eb0cdfcb522d3fe3c97f62783e8cc78b230b52eccf863ac472"
     },
     "play.03ac07a4a21111f2.pck": {
       "bytes": 1656684,
@@ -185,9 +186,13 @@
       "bytes": 3030460,
       "sha256": "dd1ad4e2171fc4411380555d4e2e00e4341495ed70544232d6e29722b794ad91"
     },
+    "play.f5de0ec5966a6097.pck": {
+      "bytes": 2907312,
+      "sha256": "f5de0ec5966a6097b18f59253537d9d8cf6ea1ed46ecf609914fb00cd7072736"
+    },
     "play.html": {
       "bytes": 7024,
-      "sha256": "1597b87f32f1465275f6830e213996cad60cd23accdc1fdb9bf412d476410129"
+      "sha256": "ddd08cc86b4df7a0d6f37de6f87891f0d015d19a336d5a498a0300dec49de39d"
     },
     "play.icon.png": {
       "bytes": 14070,
