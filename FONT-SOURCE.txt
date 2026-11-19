@@ -1,35 +1,17 @@
-Original font: Noto Sans SC (TrueType).otf
-Original local source: C:/Windows/Fonts/Noto Sans SC (TrueType).otf
-Original retained in the editable project as noto_sans_sc.otf.
-Original SHA-256: a2b93e6c2db05d6bbbf6f27d413ec73269735b7b679019c8a5aa9670ff0ffbf2
-Modified font: Echo Sort Sans Regular (echo_sort_subset.otf).
-Copyright: 2014-2020 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.
-License: SIL Open Font License, Version 1.1; see OFL.txt.
-Upstream: https://github.com/notofonts/noto-cjk
-License source: https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/LICENSE
-Modifications: glyph subsetting with FontTools; family, full and PostScript names
-changed to Echo Sort Sans. The copyright and license records remain in the font.
-Rebuild and verify with: python deliverables/echo_sort/tools/subset_font.py
+Font source: Adobe Source Han Sans SC Bold (思源黑体简体中文粗体), version 2.005.
+Copyright: © 2014-2025 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.
+License: SIL Open Font License, Version 1.1; see OFL-SOURCEHAN.txt.
+Official Adobe release: https://github.com/adobe-fonts/source-han-sans/releases/tag/2.005R
+Pinned Adobe repository commit: 6c709ca72d3d7c46ab42ebecc1a26e7d69595a37
+Original font: https://raw.githubusercontent.com/adobe-fonts/source-han-sans/6c709ca72d3d7c46ab42ebecc1a26e7d69595a37/OTF/SimplifiedChinese/SourceHanSansSC-Bold.otf
+Original license: https://raw.githubusercontent.com/adobe-fonts/source-han-sans/6c709ca72d3d7c46ab42ebecc1a26e7d69595a37/LICENSE.txt
+Original SHA-256: df2b90f5bcc6d01dfc964cec5f6d535d6b6aebd26ed7fd79a9c1b3f2112fcb6b
+Original family/style/weight: Source Han Sans SC / Bold / 700.
 
-Primary font: ZCOOL KuaiLe Regular (ZCOOLKuaiLe-Regular.ttf).
-Copyright: 2018 The ZCOOL KuaiLe Project Authors
-(https://github.com/googlefonts/zcool-kuaile).
-Official source: https://raw.githubusercontent.com/google/fonts/main/ofl/zcoolkuaile/ZCOOLKuaiLe-Regular.ttf
-Original SHA-256: 812a6fc1fe54b6d73a419245c32dfeba8aa33104d5be90d1cf6af082007cb71d
-License: SIL Open Font License, Version 1.1; see OFL-ZCOOL.txt in source or
-the combined FONT-OFL.txt in the published build.
-Modified font: Bento Pop Round Regular (bento_pop_round.ttf).
-Modifications: glyph subsetting with FontTools; family, full and PostScript
-names changed to Bento Pop Round. Copyright and license records are retained.
-The full upstream ZCOOL font remains outside the exported game under docs.
-Echo Sort Sans is a limited fallback for characters not in Bento Pop Round.
-
-Numeric font: Fredoka variable font, instantiated at weight 700 and width 100.
-Copyright: 2016 The Fredoka Project Authors (https://github.com/hafontia/Fredoka-One).
-Official source: https://github.com/google/fonts/tree/main/ofl/fredoka
-Original SHA-256: 2ba02e68b152868aef9ba28e24b3648c7d457fe6f25c761f2c2c53fb61a73fc8
-License: SIL Open Font License, Version 1.1; see OFL-Fredoka.txt in source or
-the combined FONT-OFL.txt in the published build.
-Modified font: Bento Pop Numbers Bold (bento_pop_numbers.ttf), a static
-instance and glyph subset with renamed family, full and PostScript names.
-Copyright and license records are retained; the full source stays in docs.
+Bundled subset: Bento UI Sans Bold (bento_source_han.otf).
+Modifications: retained glyphs are subset with FontTools; family, full and
+PostScript names are changed to Bento UI Sans/BentoUISans-Bold. Copyright and
+license records, outlines, advances and native CFF hints are retained. Layout
+features and locale systems are limited to the game's horizontal Simplified
+Chinese and Latin usage. The unmodified Adobe font stays outside the game.
+Rebuild: python deliverables/echo_sort/tools/subset_font.py
