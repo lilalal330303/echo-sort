@@ -1,8 +1,8 @@
 {
   "format": 2,
-  "version": "campaign-20261121",
+  "version": "campaign-test-20261121",
   "godot": "4.7.stable.official.5b4e0cb0f",
-  "main_pack": "play.f6ef84e393392b3c.pck",
+  "main_pack": "play.c05d3f219267dc73.pck",
   "runtime": [
     "index.html",
     "play.html",
@@ -13,7 +13,7 @@
     "play.apple-touch-icon.png",
     "play.audio.worklet.js",
     "play.audio.position.worklet.js",
-    "play.f6ef84e393392b3c.pck",
+    "play.c05d3f219267dc73.pck",
     "chapter-packs.json",
     "content/chapter-02-216f55eead5b524f.pck",
     "content/chapter-03-cff591fcfd0f3c34.pck",
@@ -47,6 +47,7 @@
     "play.dd096c8fa7fd1f0c.pck",
     "play.dd1ad4e2171fc441.pck",
     "play.f5de0ec5966a6097.pck",
+    "play.f6ef84e393392b3c.pck",
     "play.pck"
   ],
   "files": {
@@ -68,11 +69,11 @@
     },
     "README.md": {
       "bytes": 1203,
-      "sha256": "115f08c2344b661c8479080b8ab9c260192c29be23b332ea8625c52fc82c901a"
+      "sha256": "6b2d2069542de556a920650710e00c5f50eb64887be043df772efaa5a5dca4ef"
     },
     "chapter-packs.json": {
-      "bytes": 957,
-      "sha256": "db01d0a63a9690504a69c8646dbd8f0143701dcd08c55fd09037d197c175092e"
+      "bytes": 962,
+      "sha256": "0e8e9d19682631d53f2fc72fb645fb77cb9b7877af33937e4d43c90219e23480"
     },
     "content/chapter-02-216f55eead5b524f.pck": {
       "bytes": 461864,
@@ -115,8 +116,8 @@
       "sha256": "14b9ababd028299ffebcad966c2b96efb705659174b5aebbc6f8779799631198"
     },
     "index.html": {
-      "bytes": 1950,
-      "sha256": "bcbae963bc4c76bff4028b4956686a939675d97f981440d23b52b016dabaf10e"
+      "bytes": 1955,
+      "sha256": "4da98a2e9ab3b0eab27120ba0f3e08708eb6b70e8573a411bd278b4b2609df20"
     },
     "play.03ac07a4a21111f2.pck": {
       "bytes": 1656684,
@@ -170,6 +171,10 @@
       "bytes": 7298,
       "sha256": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3"
     },
+    "play.c05d3f219267dc73.pck": {
+      "bytes": 2877092,
+      "sha256": "c05d3f219267dc735404b7590537c6999878eedc73d5cdbbb3cfc5c355cac09a"
+    },
     "play.c13b51d392816c22.pck": {
       "bytes": 2895332,
       "sha256": "c13b51d392816c22281a9a26c17e6d1898a1924a9668760addcc43d3a3284f0a"
@@ -211,8 +216,8 @@
       "sha256": "f6ef84e393392b3c27dd64c26ed986037a94b9187a780c5340e7cf2e9139aa74"
     },
     "play.html": {
-      "bytes": 7024,
-      "sha256": "5f0cf82b4d7f1f2f460467d5d02baf7b390a4e851d861da4196111cb5864e3dc"
+      "bytes": 10713,
+      "sha256": "790a5ae3d92578d088c04b7dfc0986d446b0526b19455f8cdf2b5dc82f2eb7b2"
     },
     "play.icon.png": {
       "bytes": 14070,

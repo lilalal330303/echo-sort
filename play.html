@@ -25,6 +25,18 @@
     #hint{font-size:13px;line-height:1.8;color:#886249;max-width:300px;margin:0;min-height:47px}
     #retry{background:linear-gradient(#ff816a,#f24c3d);color:white;border:2px solid #fff6dc;border-radius:22px;padding:13px 32px;margin-top:22px;font:inherit;font-weight:800;box-shadow:0 4px 0 #bd3e2f;cursor:pointer;touch-action:manipulation}
     #retry[hidden]{display:none}.foot{position:absolute;bottom:max(26px,env(safe-area-inset-bottom));font-size:11px;color:#8293a8;letter-spacing:.04em}
+    html.test-picker,html.test-picker body{height:auto;min-height:100%;overflow:auto;touch-action:pan-y}
+    #test-picker{position:relative;width:min(560px,100%);margin:auto;padding:max(22px,env(safe-area-inset-top)) 16px max(22px,env(safe-area-inset-bottom));}
+    #test-picker h1{margin:0 0 6px;font-size:27px}#test-picker p{margin:0 0 14px;color:#75503e}
+    .test-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+    .test-home{display:flex;align-items:center;min-height:44px;color:#653c2a;font-weight:700;white-space:nowrap}
+    .test-chapter{padding:12px;margin-top:12px;border:1px solid #edc899;border-radius:18px;background:#fff9ed;box-shadow:0 3px 0 #eac999}
+    #test-picker h2{margin:0 0 9px;font-size:15px;color:#55301f}
+    .test-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+    .test-grid.shortcuts{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .test-level{display:grid;place-items:center;min-height:46px;border-radius:12px;border:1px solid #c79b64;background:#fff2d6;color:#55301f;text-decoration:none;font-weight:800;font-size:18px;font-variant-numeric:tabular-nums;touch-action:manipulation}
+    .test-level.key{background:#ad3425;color:white;border-color:#89251c}
+    .test-level:focus-visible,.test-home:focus-visible{outline:3px solid #146b65;outline-offset:2px}
   </style>
 </head>
 <body>
@@ -41,65 +53,117 @@
   <noscript>请开启浏览器 JavaScript 以进入游戏。</noscript>
   <script src="play.js"></script>
   <script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"play","experimentalVK":false,"fileSizes":{"play.wasm":39509339,"play.f6ef84e393392b3c.pck":2876004},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"mainPack":"play.f6ef84e393392b3c.pck"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"play","experimentalVK":false,"fileSizes":{"play.wasm":39509339,"play.c05d3f219267dc73.pck":2877092},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"mainPack":"play.c05d3f219267dc73.pck"};
 // Keep the render buffer at the designed ratio. CSS fits it into the viewport
 // over the kitchen backdrop, avoiding engine-generated black letterboxes.
 GODOT_CONFIG.canvasResizePolicy = 0;
 const GODOT_THREADS_ENABLED = false;
-const ECHO_BUILD = 'campaign-20261121';
-const loader = document.getElementById('loading');
-const progress = document.getElementById('progress');
-const percentage = document.getElementById('percent');
-const stage = document.getElementById('stage');
-const hint = document.getElementById('hint');
-const retry = document.getElementById('retry');
-retry.addEventListener('click', () => location.reload());
-let complete = false;
-let lastProgress = performance.now();
-let lastBytes = -1;
-let phase = 'download';
-// Diagnostics stay in memory; no telemetry is sent to a service.
-window.echoBoot = {version:ECHO_BUILD,startedAt:performance.now(),phase:'download',progress:0};
-const slowTimer = setInterval(() => {
-  if (complete || document.hidden) return;
-  if (performance.now() - lastProgress > 15000) {
-    hint.textContent = phase === 'download' ? '网络暂时较慢，请保持页面开启。若长时间没有变化，可重新加载。' : '正在打开场景，首次准备可能需要多等一会儿。';
-    retry.hidden = false;
+const ECHO_BUILD = 'campaign-test-20261121';
+const params = new URLSearchParams(location.search);
+const requestedLevel = params.get('level') || '';
+const testMode = params.get('test') === '1';
+const testLevel = testMode && /^(?:[1-9]|[1-5][0-9]|60)$/.test(requestedLevel) ? Number(requestedLevel) : 0;
+
+function showTestPicker() {
+  document.title = '双拼厨房 · 测试选关';
+  document.documentElement.classList.add('test-picker');
+  document.getElementById('canvas').style.display = 'none';
+  document.getElementById('loading').remove();
+  const picker = document.createElement('main');
+  picker.id = 'test-picker';
+  picker.innerHTML = '<div class="test-head"><h1>测试选关</h1><a class="test-home" href="./">正常试玩</a></div><p>60 关任选，测试进度单独保存。</p>';
+  const keyLevels = [43, 59, 60];
+  function addGroup(title, levels, shortcuts = false) {
+    const section = document.createElement('section');
+    section.className = 'test-chapter';
+    const header = document.createElement('h2');
+    header.textContent = title;
+    const grid = document.createElement('div');
+    grid.className = shortcuts ? 'test-grid shortcuts' : 'test-grid';
+    for (const level of levels) {
+      const link = document.createElement('a');
+      link.className = keyLevels.includes(level) ? 'test-level key' : 'test-level';
+      link.href = `play.html?v=${ECHO_BUILD}&test=1&level=${level}`;
+      link.textContent = shortcuts ? `第 ${level} 关` : String(level).padStart(2, '0');
+      link.setAttribute('aria-label', `测试第 ${level} 关`);
+      grid.append(link);
+    }
+    section.append(header, grid);
+    picker.append(section);
   }
-}, 3000);
-function bootFailure(error) {
-  complete = true; clearInterval(slowTimer);
-  window.echoBoot.phase = 'failed';
-  stage.textContent = '厨房暂时没有准备好';
-  hint.textContent = '请检查网络后重试，也可以在手机浏览器中打开此链接。';
-  retry.hidden = false;
-  console.error('Echo Sort startup failed:', error);
+  addGroup('重点关卡', keyLevels, true);
+  for (let chapter = 0; chapter < 6; chapter++) {
+    addGroup(`第 ${chapter + 1} 章`, Array.from({length:10}, (_, i) => chapter * 10 + i + 1));
+  }
+  document.body.append(picker);
 }
-try {
-  const missing = Engine.getMissingFeatures({threads:GODOT_THREADS_ENABLED});
-  if (missing.length) {
-    bootFailure(new Error(missing.join(', ')));
-    hint.textContent = '当前浏览器暂不支持运行游戏，请尝试更新微信或用系统浏览器打开。';
-  } else {
-    const engine = new Engine(GODOT_CONFIG);
-    engine.startGame({onProgress(current,total) {
-      if (current !== lastBytes) {lastProgress = performance.now(); lastBytes = current; retry.hidden = true;}
-      if (total > 0) {
-        const value = Math.max(0, Math.min(100, current / total * 100));
-        progress.value = value; percentage.textContent = Math.floor(value) + '%';
-        window.echoBoot.progress = value;
-        if (current >= total) {
-          phase = 'initialize'; stage.textContent = '马上开饭';
-          hint.textContent = '餐点已就绪，马上开饭。';
-        } else {stage.textContent = '备餐中';}
-      } else {progress.removeAttribute('value'); percentage.textContent = '准备中';}
-    }}).then(() => {
-      complete = true; clearInterval(slowTimer);
-      window.echoBoot.phase = 'ready'; window.echoBoot.readyAt = performance.now();
-      loader.remove();
-    }).catch(bootFailure);
+
+if (testMode && !testLevel) {
+  showTestPicker();
+} else {
+  if (testLevel) {
+    document.title = `双拼厨房 · 测试第 ${testLevel} 关`;
+    GODOT_CONFIG.args = [...GODOT_CONFIG.args, '--', `--campaign-test-level=${testLevel}`];
+    window.openCampaignTestPicker = () => location.replace(`play.html?v=${ECHO_BUILD}&test=1`);
   }
-} catch (error) {bootFailure(error);}
+  bootGame();
+}
+
+function bootGame() {
+  const loader = document.getElementById('loading');
+  const progress = document.getElementById('progress');
+  const percentage = document.getElementById('percent');
+  const stage = document.getElementById('stage');
+  const hint = document.getElementById('hint');
+  const retry = document.getElementById('retry');
+  retry.addEventListener('click', () => location.reload());
+  let complete = false;
+  let lastProgress = performance.now();
+  let lastBytes = -1;
+  let phase = 'download';
+  // Diagnostics stay in memory; no telemetry is sent to a service.
+  window.echoBoot = {version:ECHO_BUILD,startedAt:performance.now(),phase:'download',progress:0};
+  const slowTimer = setInterval(() => {
+    if (complete || document.hidden) return;
+    if (performance.now() - lastProgress > 15000) {
+      hint.textContent = phase === 'download' ? '网络暂时较慢，请保持页面开启。若长时间没有变化，可重新加载。' : '正在打开场景，首次准备可能需要多等一会儿。';
+      retry.hidden = false;
+    }
+  }, 3000);
+  function bootFailure(error) {
+    complete = true; clearInterval(slowTimer);
+    window.echoBoot.phase = 'failed';
+    stage.textContent = '厨房暂时没有准备好';
+    hint.textContent = '请检查网络后重试，也可以在手机浏览器中打开此链接。';
+    retry.hidden = false;
+    console.error('Echo Sort startup failed:', error);
+  }
+  try {
+    const missing = Engine.getMissingFeatures({threads:GODOT_THREADS_ENABLED});
+    if (missing.length) {
+      bootFailure(new Error(missing.join(', ')));
+      hint.textContent = '当前浏览器暂不支持运行游戏，请尝试更新微信或用系统浏览器打开。';
+    } else {
+      const engine = new Engine(GODOT_CONFIG);
+      engine.startGame({onProgress(current,total) {
+        if (current !== lastBytes) {lastProgress = performance.now(); lastBytes = current; retry.hidden = true;}
+        if (total > 0) {
+          const value = Math.max(0, Math.min(100, current / total * 100));
+          progress.value = value; percentage.textContent = Math.floor(value) + '%';
+          window.echoBoot.progress = value;
+          if (current >= total) {
+            phase = 'initialize'; stage.textContent = '马上开饭';
+            hint.textContent = '餐点已就绪，马上开饭。';
+          } else {stage.textContent = '备餐中';}
+        } else {progress.removeAttribute('value'); percentage.textContent = '准备中';}
+      }}).then(() => {
+        complete = true; clearInterval(slowTimer);
+        window.echoBoot.phase = 'ready'; window.echoBoot.readyAt = performance.now();
+        loader.remove();
+      }).catch(bootFailure);
+    }
+  } catch (error) {bootFailure(error);}
+}
   </script>
 </body>
 </html>
