@@ -37,6 +37,14 @@
     .test-level{display:grid;place-items:center;min-height:46px;border-radius:12px;border:1px solid #c79b64;background:#fff2d6;color:#55301f;text-decoration:none;font-weight:800;font-size:18px;font-variant-numeric:tabular-nums;touch-action:manipulation}
     .test-level.key{background:#ad3425;color:white;border-color:#89251c}
     .test-level:focus-visible,.test-home:focus-visible{outline:3px solid #146b65;outline-offset:2px}
+    .test-stats{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px;font-variant-numeric:tabular-nums;text-align:left}
+    .test-stats th,.test-stats td{padding:8px 4px;border-bottom:1px solid #edc899;vertical-align:top;overflow-wrap:anywhere}
+    .test-stats thead th{font-size:12px;color:#75503e}.test-stats tbody th{color:#ad3425}
+    .test-stats th:first-child{width:13%}.test-stats th:nth-child(2){width:25%}.test-stats th:nth-child(3){width:13%}
+    .test-stats small{display:block;color:#75503e;font-size:11px}.test-history{margin:8px 0 0;font-size:13px}
+    .test-history summary{cursor:pointer;min-height:44px;padding:12px 0 8px;font-weight:700;color:#653c2a}
+    .test-history ul{padding-inline-start:20px;margin:0 0 8px;line-height:1.75}
+    #test-picker .test-caption{margin:10px 0 0;font-size:12px}
   </style>
 </head>
 <body>
@@ -53,26 +61,122 @@
   <noscript>请开启浏览器 JavaScript 以进入游戏。</noscript>
   <script src="play.js"></script>
   <script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"play","experimentalVK":false,"fileSizes":{"play.wasm":39509339,"play.c05d3f219267dc73.pck":2877092},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"mainPack":"play.c05d3f219267dc73.pck"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"play","experimentalVK":false,"fileSizes":{"play.wasm":39509339,"play.95d2b4bb210c1384.pck":2877508},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"mainPack":"play.95d2b4bb210c1384.pck"};
 // Keep the render buffer at the designed ratio. CSS fits it into the viewport
 // over the kitchen backdrop, avoiding engine-generated black letterboxes.
 GODOT_CONFIG.canvasResizePolicy = 0;
 const GODOT_THREADS_ENABLED = false;
-const ECHO_BUILD = 'campaign-test-20261121';
+const ECHO_BUILD = 'campaign-stats-20261121';
 const params = new URLSearchParams(location.search);
 const requestedLevel = params.get('level') || '';
 const testMode = params.get('test') === '1';
 const testLevel = testMode && /^(?:[1-9]|[1-5][0-9]|60)$/.test(requestedLevel) ? Number(requestedLevel) : 0;
+const statPrefix = 'bento:campaign-20261121:stat:';
+const toolLabels = {hint_used:'提示', undo_used:'撤回', expand_used:'扩容', rescue_used:'救援'};
+let statStorageAvailable = true;
+
+function readTestStats(level) {
+  try {
+    const saved = JSON.parse(localStorage.getItem(statPrefix + level));
+    if (saved && Number.isInteger(saved.wins) && Number.isInteger(saved.fails) && saved.tools && Array.isArray(saved.history)) return saved;
+  } catch (error) {
+    if (!(error instanceof SyntaxError)) statStorageAvailable = false;
+  }
+  return {wins:0, fails:0, lastMs:null, bestMs:null, tools:{}, history:[]};
+}
+
+function recordTestEvent(entry) {
+  const {event, level} = entry;
+  if (!Number.isInteger(level) || level < 1 || level > 60) return;
+  const stat = readTestStats(level);
+  const item = {event, at:entry.timestamp};
+  if (event === 'level_win') {
+    if (!Number.isFinite(entry.active_ms) || entry.active_ms < 0) return;
+    stat.wins++;
+    stat.lastMs = entry.active_ms;
+    stat.bestMs = stat.bestMs === null ? stat.lastMs : Math.min(stat.bestMs, stat.lastMs);
+    item.ms = stat.lastMs;
+    item.assists = entry.assists;
+  } else if (event === 'level_fail') {
+    stat.fails++;
+  } else if (Object.prototype.hasOwnProperty.call(toolLabels, event)) {
+    stat.tools[event] = (stat.tools[event] || 0) + 1;
+    if (event === 'rescue_used') item.steps = entry.steps;
+  } else {
+    return;
+  }
+  stat.history = [...stat.history.slice(-11), item];
+  try {localStorage.setItem(statPrefix + level, JSON.stringify(stat));}
+  catch (error) {statStorageAvailable = false;}
+}
+
+function formatTestDuration(ms) {
+  const sec = Math.floor(ms / 1000);
+  return `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`;
+}
+
+function testStatsTable(levels, stats) {
+  const table = document.createElement('table');
+  table.className = 'test-stats';
+  table.innerHTML = '<thead><tr><th scope="col">关卡</th><th scope="col">通关用时</th><th scope="col">满盘</th><th scope="col">累计道具</th></tr></thead>';
+  const body = document.createElement('tbody');
+  for (const level of levels) {
+    const stat = stats.get(level);
+    const row = document.createElement('tr');
+    const number = document.createElement('th');
+    number.setAttribute('scope', 'row');
+    number.textContent = String(level);
+    const time = document.createElement('td');
+    time.textContent = stat.wins ? formatTestDuration(stat.lastMs) : '—';
+    if (stat.wins > 1) {
+      const best = document.createElement('small');
+      best.textContent = `最快 ${formatTestDuration(stat.bestMs)}`;
+      time.append(best);
+    }
+    const fails = document.createElement('td');
+    fails.textContent = String(stat.fails);
+    const tools = document.createElement('td');
+    tools.textContent = Object.entries(toolLabels).filter(([event]) => stat.tools[event])
+      .map(([event, label]) => `${label} ${stat.tools[event]}`).join(' · ') || '—';
+    row.append(number, time, fails, tools);
+    body.append(row);
+  }
+  table.append(body);
+  return table;
+}
+
+function appendTestHistory(container, level, stat) {
+  if (!stat.history.length) return;
+  const details = document.createElement('details');
+  details.className = 'test-history';
+  const title = document.createElement('summary');
+  title.textContent = `第 ${level} 关 · 最近记录`;
+  const list = document.createElement('ul');
+  for (const item of [...stat.history].reverse()) {
+    const line = document.createElement('li');
+    const time = Number.isFinite(item.at) ? new Date(item.at * 1000).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) : '';
+    let text = toolLabels[item.event];
+    if (item.event === 'level_win') text = `通关 ${formatTestDuration(item.ms)} · 道具 ${item.assists} 次`;
+    if (item.event === 'level_fail') text = '满盘';
+    if (item.event === 'rescue_used' && item.steps) text += ` · 回退 ${item.steps} 步`;
+    line.textContent = `${time} ${text}`.trim();
+    list.append(line);
+  }
+  details.append(title, list);
+  container.append(details);
+}
 
 function showTestPicker() {
   document.title = '双拼厨房 · 测试选关';
   document.documentElement.classList.add('test-picker');
   document.getElementById('canvas').style.display = 'none';
-  document.getElementById('loading').remove();
+  document.getElementById('loading')?.remove();
+  document.getElementById('test-picker')?.remove();
   const picker = document.createElement('main');
   picker.id = 'test-picker';
   picker.innerHTML = '<div class="test-head"><h1>测试选关</h1><a class="test-home" href="./">正常试玩</a></div><p>60 关任选，测试进度单独保存。</p>';
   const keyLevels = [43, 59, 60];
+  const stats = new Map(Array.from({length:60}, (_, i) => [i + 1, readTestStats(i + 1)]));
   function addGroup(title, levels, shortcuts = false) {
     const section = document.createElement('section');
     section.className = 'test-chapter';
@@ -89,22 +193,45 @@ function showTestPicker() {
       grid.append(link);
     }
     section.append(header, grid);
+    if (shortcuts) {
+      section.append(testStatsTable(levels, stats));
+      const caption = document.createElement('p');
+      caption.className = 'test-caption';
+      caption.textContent = '显示最近通关用时，暂停和广告不计时。满盘与道具按关累计。';
+      section.append(caption);
+      for (const level of levels) appendTestHistory(section, level, stats.get(level));
+    } else {
+      const details = document.createElement('details');
+      details.className = 'test-history';
+      const title = document.createElement('summary');
+      title.textContent = '本章记录';
+      details.append(title, testStatsTable(levels, stats));
+      for (const level of levels) appendTestHistory(details, level, stats.get(level));
+      section.append(details);
+    }
     picker.append(section);
   }
   addGroup('重点关卡', keyLevels, true);
   for (let chapter = 0; chapter < 6; chapter++) {
     addGroup(`第 ${chapter + 1} 章`, Array.from({length:10}, (_, i) => chapter * 10 + i + 1));
   }
+  if (!statStorageAvailable) {
+    const notice = document.createElement('p');
+    notice.textContent = '当前浏览器无法读取本机测试记录。';
+    picker.prepend(notice);
+  }
   document.body.append(picker);
 }
 
 if (testMode && !testLevel) {
   showTestPicker();
+  window.addEventListener('pageshow', event => {if (event.persisted) showTestPicker();});
 } else {
   if (testLevel) {
     document.title = `双拼厨房 · 测试第 ${testLevel} 关`;
     GODOT_CONFIG.args = [...GODOT_CONFIG.args, '--', `--campaign-test-level=${testLevel}`];
     window.openCampaignTestPicker = () => location.replace(`play.html?v=${ECHO_BUILD}&test=1`);
+    window.recordCampaignPlaytest = recordTestEvent;
   }
   bootGame();
 }
